@@ -1,5 +1,5 @@
 # Sentinel-01 Strategic Vision
-## AETHEL Finance Lab - The Most Powerful Financial Agent
+## AETHEL Foundation - The Most Powerful Financial Agent
 
 > **Mission**: Build the most trusted, auditable, and interoperable autonomous financial agent in the crypto ecosystem.
 
@@ -288,4 +288,4 @@ In a world of autonomous agents managing trillions in assets, the agent that can
 
 > "Capital preservation is mandatory. Profit is secondary. Trust is everything."
 
-**AETHEL Finance Lab** - Building the future of trustworthy autonomous finance.
+**AETHEL Foundation** - Building the future of trustworthy autonomous finance.

@@ -1,6 +1,6 @@
 """
 Sentinel-01 Policy Engine
-AETHEL Finance Lab - Regime Classification and Policy Enforcement
+AETHEL Foundation - Regime Classification and Policy Enforcement
 
 This module determines WHAT ACTIONS ARE ALLOWED based on market regime.
 It does NOT decide what actions to take - that's the strategy layer.

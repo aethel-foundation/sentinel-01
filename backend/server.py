@@ -1,6 +1,6 @@
 """
 Sentinel-01 API Server
-AETHEL Finance Lab - FastAPI Backend
+AETHEL Foundation - FastAPI Backend
 
 Main API server for Sentinel-01 dashboard and external integrations.
 Provides endpoints for:
@@ -52,7 +52,7 @@ db = client[db_name]
 # FastAPI app
 app = FastAPI(
     title="Sentinel-01 API",
-    description="AETHEL Finance Lab - ERC-8004 Capital Protection Agent",
+    description="AETHEL Foundation - ERC-8004 Capital Protection Agent",
     version="0.1.0"
 )
 
@@ -120,7 +120,7 @@ class EmergencyTrigger(BaseModel):
 async def root():
     return {
         "name": "Sentinel-01",
-        "organization": "AETHEL Finance Lab",
+        "organization": "AETHEL Foundation",
         "version": config.identity.version,
         "status": "operational"
     }

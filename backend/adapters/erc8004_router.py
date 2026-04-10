@@ -1,6 +1,6 @@
 """
 ERC-8004 Risk Router Adapter
-AETHEL Finance Lab
+AETHEL Foundation
 
 Placeholder adapter for submitting TradeIntents for execution.
 """

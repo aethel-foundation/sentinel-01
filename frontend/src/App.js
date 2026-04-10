@@ -245,7 +245,7 @@ const Dashboard = () => {
                 <h1 className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                   SENTINEL-01
                 </h1>
-                <p className="text-xs text-slate-500">AETHEL Finance Lab</p>
+                <p className="text-xs text-slate-500">AETHEL Foundation</p>
               </div>
             </div>
             
@@ -656,7 +656,7 @@ const Dashboard = () => {
       {/* Footer */}
       <footer className="border-t border-slate-800 mt-8 py-4">
         <div className="container mx-auto px-4 text-center text-xs text-slate-600">
-          <p>AETHEL Finance Lab | Sentinel-01 ERC-8004 Agent</p>
+          <p>AETHEL Foundation | Sentinel-01 ERC-8004 Agent</p>
           <p className="mt-1">Capital Preservation First | Profit Secondary</p>
         </div>
       </footer>

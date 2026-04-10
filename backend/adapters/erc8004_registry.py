@@ -1,6 +1,6 @@
 """
 ERC-8004 Validation Registry Adapter
-AETHEL Finance Lab
+AETHEL Foundation
 
 Placeholder adapter for publishing ValidationArtifacts on-chain.
 """

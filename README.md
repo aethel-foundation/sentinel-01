@@ -1,10 +1,10 @@
 # Sentinel-01
 
 <p align="center">
-  <img src="assets/sentinel_01_header.png" alt="Sentinel-01 Header Banner">
+  <img src="assets/aethel_foundation_sentinel_header.png" alt="Sentinel-01 Header Banner">
 </p>
 
-## AETHEL Finance Lab - ERC-8004 Capital Protection Agent
+## AETHEL Foundation - ERC-8004 Capital Protection Agent
 
 <p align="center">
   <img src="https://img.shields.io/badge/ERC--8004-Compatible-cyan" alt="ERC-8004 Compatible">
@@ -192,4 +192,4 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ---
 
-**AETHEL Finance Lab** | Building the future of autonomous, trustworthy financial agents.
+**AETHEL Foundation** | Building the future of autonomous, trustworthy financial agents.

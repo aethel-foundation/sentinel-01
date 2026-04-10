@@ -1,6 +1,6 @@
 """
 Sentinel-01 Multi-Agent Integration Layer
-AETHEL Finance Lab - CLAW Ecosystem & Agent Network Integration
+AETHEL Foundation - CLAW Ecosystem & Agent Network Integration
 
 This module provides integration with:
 - CLAW Ecosystem (OpenClaw, ClawHub skills)
@@ -413,7 +413,7 @@ class MultiAgentHub:
             "name": "Sentinel-01 Risk Engine",
             "description": "Constitutional risk assessment for DeFi trading",
             "version": self._agent_card.version,
-            "author": "AETHEL Finance Lab",
+            "author": "AETHEL Foundation",
             "category": "defi/risk-management",
             "tags": ["risk", "defi", "trading", "capital-protection", "erc-8004"],
             "endpoints": {

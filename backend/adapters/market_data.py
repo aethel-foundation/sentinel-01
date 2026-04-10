@@ -1,6 +1,6 @@
 """
 Sentinel-01 Market Data Adapter
-AETHEL Finance Lab - External Data Integration
+AETHEL Foundation - External Data Integration
 
 This adapter connects Sentinel-01 to external market data sources.
 Currently supports CoinGecko API for real price data.

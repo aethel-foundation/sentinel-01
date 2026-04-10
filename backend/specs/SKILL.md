@@ -1,5 +1,5 @@
 # Sentinel-01 Skills
-## AETHEL Finance Lab
+## AETHEL Foundation
 
 ### Core Skills
 

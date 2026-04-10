@@ -1,6 +1,6 @@
 """
 Sentinel-01 Emergency Protocol
-AETHEL Finance Lab - Crisis Response System
+AETHEL Foundation - Crisis Response System
 
 This module handles emergency situations that require immediate action
 without waiting for normal governance processes.

@@ -1,6 +1,6 @@
 """
 Sentinel-01 Executor
-AETHEL Finance Lab - Trade Intent Building and Execution
+AETHEL Foundation - Trade Intent Building and Execution
 
 This module builds ERC-8004 compliant TradeIntents and handles execution.
 In simulation mode, executes against mock state.

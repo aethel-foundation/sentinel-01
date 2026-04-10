@@ -1,6 +1,6 @@
 """
 Sentinel-01 Configuration
-AETHEL Finance Lab - Risk-First ERC-8004 Agent
+AETHEL Foundation - Risk-First ERC-8004 Agent
 
 Active risk parameters and policy constants.
 These values define the agent's operational boundaries.
@@ -69,7 +69,7 @@ class GovernanceConfig:
 class AgentIdentity:
     """ERC-8004 Agent Identity"""
     agent_id: str = "sentinel-01"
-    organization: str = "AETHEL Finance Lab"
+    organization: str = "AETHEL Foundation"
     version: str = "0.1.0"
     erc8004_compatible: bool = True
     policy_hash: str = ""  # Computed at deployment

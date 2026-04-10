@@ -1,6 +1,6 @@
 """
 Sentinel-01 Signal Engine
-AETHEL Finance Lab - Market Signal Detection
+AETHEL Foundation - Market Signal Detection
 
 Generates market signals: volatility, trend, liquidity, anomaly detection.
 This module is OBSERVATIONAL ONLY - it does not make trading decisions.

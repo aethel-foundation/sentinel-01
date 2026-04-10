@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Sentinel-01 Backend API Testing
-AETHEL Finance Lab - Comprehensive API Test Suite
+AETHEL Foundation - Comprehensive API Test Suite
 
 Tests all backend endpoints for the ERC-8004 capital protection agent.
 """
@@ -313,7 +313,7 @@ class Sentinel01APITester:
         """Run comprehensive test suite"""
         print("=" * 60)
         print("🛡️  SENTINEL-01 API TEST SUITE")
-        print("   AETHEL Finance Lab - ERC-8004 Agent")
+        print("   AETHEL Foundation - ERC-8004 Agent")
         print("=" * 60)
         print(f"Backend URL: {self.base_url}")
         print(f"API URL: {self.api_url}")

@@ -1,6 +1,6 @@
 """
 Sentinel-01 Main Loop
-AETHEL Finance Lab - Agent Orchestration
+AETHEL Foundation - Agent Orchestration
 
 This is the main decision loop for Sentinel-01.
 It orchestrates all modules in a continuous cycle:

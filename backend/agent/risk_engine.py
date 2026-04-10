@@ -1,6 +1,6 @@
 """
 Sentinel-01 Risk Engine
-AETHEL Finance Lab - Deterministic Pre-Trade Checklist
+AETHEL Foundation - Deterministic Pre-Trade Checklist
 
 This module enforces the constitutional risk limits.
 Every trade MUST pass the risk checklist before execution.

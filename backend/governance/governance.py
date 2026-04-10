@@ -1,6 +1,6 @@
 """
 Sentinel-01 Governance
-AETHEL Finance Lab - Constitutional Control Layer
+AETHEL Foundation - Constitutional Control Layer
 
 This module implements the governance framework that controls Sentinel-01.
 The agent CANNOT override governance decisions.

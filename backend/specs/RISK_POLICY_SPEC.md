@@ -1,5 +1,5 @@
 # Risk Policy Specification
-## Sentinel-01 - AETHEL Finance Lab
+## Sentinel-01 - AETHEL Foundation
 
 ### Capital Protection Limits
 

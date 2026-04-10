@@ -1,5 +1,5 @@
 # Sentinel-01 Agent Specification
-## AETHEL Finance Lab
+## AETHEL Foundation
 
 ### Overview
 Sentinel-01 is an ERC-8004 native capital protection agent. Its primary mission is **capital preservation**, not profit maximization.

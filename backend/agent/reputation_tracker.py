@@ -1,6 +1,6 @@
 """
 Sentinel-01 Reputation Tracker
-AETHEL Finance Lab - ValidationArtifacts and Reputation Metrics
+AETHEL Foundation - ValidationArtifacts and Reputation Metrics
 
 This module generates ValidationArtifacts for every decision cycle
 and maintains the agent's reputation metrics.

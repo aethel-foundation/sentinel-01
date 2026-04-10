@@ -1,6 +1,6 @@
 """
 Sentinel-01 Demo Mode
-AETHEL Finance Lab - Pre-configured Scenarios for Demonstration
+AETHEL Foundation - Pre-configured Scenarios for Demonstration
 
 Provides dramatic, observable regime transitions and agent behavior
 for hackathon presentations and stakeholder demos.

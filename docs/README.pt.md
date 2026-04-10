@@ -1,6 +1,6 @@
 # Sentinel-01
 
-## AETHEL Finance Lab - Agente de Proteção de Capital ERC-8004
+## AETHEL Foundation - Agente de Proteção de Capital ERC-8004
 
 <p align="center">
   <img src="https://img.shields.io/badge/ERC--8004-Compatível-cyan" alt="ERC-8004 Compatível">
@@ -163,4 +163,4 @@ Sentinel-01 incorpora o princípio de que gestão de risco institucional requer 
 
 ---
 
-**AETHEL Finance Lab** | Construindo o futuro de agentes financeiros autônomos e confiáveis.
+**AETHEL Foundation** | Construindo o futuro de agentes financeiros autônomos e confiáveis.

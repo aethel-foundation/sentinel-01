@@ -3,7 +3,7 @@
 ## Project Overview
 
 **Project**: Sentinel-01  
-**Organization**: AETHEL Finance Lab  
+**Organization**: AETHEL Foundation  
 **Version**: 0.1.0  
 **Created**: 2026-04-10  
 **Status**: MVP Complete - Demo Ready
