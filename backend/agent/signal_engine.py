@@ -14,7 +14,7 @@ from typing import Dict, List, Optional, Tuple
 from enum import Enum
 import statistics
 
-from .config import config, MarketRegime
+from agent.config import config, MarketRegime
 
 
 @dataclass

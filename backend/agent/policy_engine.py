@@ -16,8 +16,8 @@ from datetime import datetime, timezone
 from typing import Dict, List, Set, Optional
 from enum import Enum
 
-from .config import config, MarketRegime, ActionType
-from .signal_engine import MarketSignal
+from agent.config import config, MarketRegime, ActionType
+from agent.signal_engine import MarketSignal
 
 
 @dataclass

@@ -18,8 +18,8 @@ from datetime import datetime, timezone
 from typing import Dict, Optional, List
 from enum import Enum
 
-from .config import config, ActionType
-from .risk_engine import RiskAssessment, PortfolioState
+from agent.config import config, ActionType
+from agent.risk_engine import RiskAssessment, PortfolioState
 
 
 class IntentStatus(Enum):

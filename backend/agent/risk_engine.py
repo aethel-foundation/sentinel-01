@@ -12,8 +12,8 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
 from enum import Enum
 
-from .config import config, RiskLimits, ActionType
-from .signal_engine import MarketSignal
+from agent.config import config, RiskLimits, ActionType
+from agent.signal_engine import MarketSignal
 
 
 class RiskCheckResult(Enum):

@@ -17,11 +17,11 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional
 from enum import Enum
 
-from .config import config, MarketRegime, ActionType
-from .signal_engine import MarketSignal
-from .risk_engine import RiskAssessment
-from .policy_engine import PolicyDecision
-from .executor import TradeIntent, ExecutionResult
+from agent.config import config, MarketRegime, ActionType
+from agent.signal_engine import MarketSignal
+from agent.risk_engine import RiskAssessment
+from agent.policy_engine import PolicyDecision
+from agent.executor import TradeIntent, ExecutionResult
 
 
 @dataclass

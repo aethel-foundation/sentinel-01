@@ -1,5 +1,9 @@
 # Sentinel-01
 
+<p align="center">
+  <img src="assets/sentinel_01_header.png" alt="Sentinel-01 Header Banner">
+</p>
+
 ## AETHEL Finance Lab - ERC-8004 Capital Protection Agent
 
 <p align="center">
@@ -42,7 +46,16 @@ cd frontend
 yarn install
 ```
 
-### Run in Simulation Mode
+### Run in Simulation Mode (Standalone Agent Loop)
+
+To run the agent's deterministic decision loop locally without the API:
+
+```bash
+cd backend
+python -m agent.main
+```
+
+### Run with API server
 
 ```bash
 # Start backend
@@ -124,18 +137,17 @@ sentinel-01/
 
 ## ERC-8004 Integration Points
 
-### Ready Now (Simulation)
-- TradeIntent structure and signing
-- ValidationArtifact generation
-- Policy hash computation
-- Reputation metrics tracking
+### ERC-8004 Architecture Pre-Staging (Phases 1-4 Complete)
+- [x] TradeIntent structure and signing mock
+- [x] ValidationArtifact generation
+- [x] Policy hash computation
+- [x] Explicit external proxy adapters (`erc8004_registry.py`, `erc8004_router.py`)
 
-### TODO for Production
-- [ ] Connect to ERC-8004 Identity Registry
-- [ ] Implement EIP-712 signing with real keys
-- [ ] Publish ValidationArtifacts on-chain
-- [ ] Connect to Risk Router contract
-- [ ] Real wallet integration
+### TODO for Production (Phase 5+)
+- [ ] Inject physical Web3 connection to Identity Registry inside Adapter.
+- [ ] Implement cross-chain EIP-712 typing for TradeIntent hashes.
+- [ ] Connect adapter endpoints to real EVM Sandbox/SDK points.
+- [ ] Enable real wallet logic inside the Executor layer.
 
 ## Demo
 
@@ -160,6 +172,15 @@ Watch the dashboard for:
 > "A missed opportunity is recoverable. A policy violation is not."
 
 Sentinel-01 embodies the principle that institutional-grade risk management requires absolute policy compliance. The agent will always choose capital preservation over potential profit.
+
+## Institutional Impact (Hackathon Rationale)
+
+While the vast majority of AI agents focus on maximizing arbitrary APY—often exposing treasuries to catastrophic ruin—Sentinel-01 prioritizes **Responsibility and Transparency**. 
+
+By pioneering a risk-first approach via simulated ERC-8004 validation:
+1. **DAO Treasuries** can deploy agents they trust, knowing risk parameters are cryptographically vetted.
+2. **Institutional DeFi** gains a much-needed layer of strict fiduciary compliance.
+3. Every neural decision yields an auditable **ValidationArtifact**, solving the black-box AI issue in decentralized finance.
 
 ## Contributing
 

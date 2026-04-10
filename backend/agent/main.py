@@ -22,12 +22,14 @@ from datetime import datetime, timezone
 from typing import Optional, Dict, Any
 import random
 
-from .config import config, MarketRegime, ActionType
-from .signal_engine import signal_engine, MarketSignal
-from .risk_engine import risk_engine, RiskAssessment, PortfolioState
-from .policy_engine import policy_engine, PolicyDecision
-from .executor import executor, TradeIntent, ExecutionResult
-from .reputation_tracker import reputation_tracker, ValidationArtifact
+from agent.config import config, MarketRegime, ActionType
+from agent.signal_engine import signal_engine, MarketSignal
+from agent.risk_engine import risk_engine, RiskAssessment, PortfolioState
+from agent.policy_engine import policy_engine, PolicyDecision
+from agent.executor import executor, TradeIntent, ExecutionResult
+from agent.reputation_tracker import reputation_tracker, ValidationArtifact
+from governance.emergency_protocol import emergency_protocol
+from adapters.erc8004_registry import registry_adapter
 
 # Configure logging
 logging.basicConfig(
@@ -210,6 +212,10 @@ class Sentinel01Agent:
         action, target_asset, amount = self.decide_candidate_action(signal, policy)
         logger.info(f"Candidate: {action.value} {target_asset} ${amount:,.2f}")
         
+        if emergency_protocol.is_trading_paused:
+            logger.warning("GOVERNANCE / EMERGENCY PAUSE: All actions must be HOLD.")
+            # Even if signal says BUY, policy engine will force HOLD because it reads pause from governance
+
         # Step 4: Risk assessment
         assessment: Optional[RiskAssessment] = None
         intent: Optional[TradeIntent] = None
@@ -251,7 +257,10 @@ class Sentinel01Agent:
             intent=intent,
             result=result
         )
-        logger.info(f"Artifact: {artifact.artifact_hash[:16]}...")
+        logger.info(f"Artifact Generated: {artifact.artifact_hash[:16]}...")
+        
+        # In production this publishes to the on-chain registry
+        registry_adapter.publish_artifact(artifact)
         
         return artifact
     

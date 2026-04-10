@@ -17,8 +17,6 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional
 from enum import Enum
 
-import sys
-sys.path.append('..')
 from agent.config import config
 
 
