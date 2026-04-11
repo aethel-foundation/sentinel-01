@@ -30,6 +30,7 @@ from agent.executor import executor, TradeIntent, ExecutionResult
 from agent.reputation_tracker import reputation_tracker, ValidationArtifact
 from governance.emergency_protocol import emergency_protocol
 from adapters.erc8004_registry import registry_adapter
+from adapters.llm_adapter import LLMAdapter
 
 # Configure logging
 logging.basicConfig(
@@ -61,6 +62,7 @@ class Sentinel01Agent:
             "ETH": 2500.0,  # Default starting prices
             "BTC": 45000.0,
         }
+        self.llm_adapter = LLMAdapter()
         
         # Initialize portfolio
         self._initialize_portfolio()
@@ -135,30 +137,63 @@ class Sentinel01Agent:
         if policy.regime in (MarketRegime.CRISIS, MarketRegime.UNKNOWN):
             return ActionType.HOLD, signal.asset, 0.0
         
-        # Simple trend-following strategy
-        trend_threshold = config.policy_thresholds.trend_strength_min
-        
-        # Strong uptrend + low volatility = consider buying
-        if (signal.trend_direction > 0.3 and 
-            signal.trend_strength > trend_threshold and
-            signal.volatility < config.policy_thresholds.volatility_volatile_max and
-            ActionType.BUY in policy.allowed_actions):
+        # Simple trend-following strategy (Fallback if LLM disabled)
+        if self.llm_adapter.provider == "mock":
+            trend_threshold = config.policy_thresholds.trend_strength_min
             
-            # Calculate trade size based on policy limits
-            max_trade = self._portfolio.total_value * (policy.max_trade_size_pct / 100)
-            trade_size = max_trade * policy.position_sizing_multiplier
+            # Strong uptrend + low volatility = consider buying
+            if (signal.trend_direction > 0.3 and 
+                signal.trend_strength > trend_threshold and
+                signal.volatility < config.policy_thresholds.volatility_volatile_max and
+                ActionType.BUY in policy.allowed_actions):
+                
+                # Calculate trade size based on policy limits
+                max_trade = self._portfolio.total_value * (policy.max_trade_size_pct / 100)
+                trade_size = max_trade * policy.position_sizing_multiplier
+                
+                if trade_size > 100:  # Minimum trade size
+                    return ActionType.BUY, signal.asset, trade_size
             
-            if trade_size > 100:  # Minimum trade size
-                return ActionType.BUY, signal.asset, trade_size
-        
-        # Strong downtrend = consider reducing exposure
-        if (signal.trend_direction < -0.3 and 
-            signal.trend_strength > trend_threshold):
+            # Strong downtrend = consider reducing exposure
+            if (signal.trend_direction < -0.3 and 
+                signal.trend_strength > trend_threshold):
+                
+                current_position = self._portfolio.positions.get(signal.asset, 0)
+                if current_position > 0 and ActionType.SELL in policy.allowed_actions:
+                    sell_amount = current_position * 0.5  # Sell half
+                    return ActionType.SELL, signal.asset, sell_amount
+        else:
+            # Use LLM Cognitive Core
+            market_data = {
+                "asset": signal.asset,
+                "price": signal.price,
+                "regime": policy.regime.value,
+                "rsi": signal.rsi,
+                "volatility": signal.volatility
+            }
+            risk_profile = {
+                "max_drawdown": config.risk_limits.max_drawdown_pct,
+                "max_pos_size": config.risk_limits.max_position_pct
+            }
             
-            current_position = self._portfolio.positions.get(signal.asset, 0)
-            if current_position > 0 and ActionType.SELL in policy.allowed_actions:
-                sell_amount = current_position * 0.5  # Sell half
-                return ActionType.SELL, signal.asset, sell_amount
+            decision = self.llm_adapter.get_trade_decision(market_data, risk_profile)
+            action_str = decision.get("action", "HOLD").upper()
+            amount = decision.get("amount", 0.0)
+            reasoning = decision.get("reasoning", "No reasoning provided.")
+            
+            logger.info(f"LLM Reasoning: {reasoning}")
+            
+            # Map string to ActionType
+            try:
+                action = ActionType[action_str]
+            except KeyError:
+                action = ActionType.HOLD
+                
+            if action not in policy.allowed_actions:
+                logger.warning(f"LLM suggested {action.value} but policy forbids it in {policy.regime.value} regime.")
+                return ActionType.HOLD, signal.asset, 0.0
+                
+            return action, signal.asset, amount
         
         return ActionType.HOLD, signal.asset, 0.0
     
