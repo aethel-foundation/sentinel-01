@@ -25,10 +25,5 @@
       "src": "/(.*)",
       "dest": "frontend/$1"
     }
-  ],
-  "env": {
-    "MONGO_URL": "@sentinel_mongo_url",
-    "DB_NAME": "sentinel_01",
-    "CORS_ORIGINS": "*"
-  }
+  ]
 }
