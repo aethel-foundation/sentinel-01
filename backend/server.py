@@ -43,11 +43,21 @@ from adapters.market_data import coingecko_adapter
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("sentinel-01.api")
 
-# MongoDB connection
-mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+# MongoDB connection (optional — falls back to in-memory if not configured)
+mongo_url = os.environ.get('MONGO_URL', '')
 db_name = os.environ.get('DB_NAME', 'sentinel_01')
-client = AsyncIOMotorClient(mongo_url)
-db = client[db_name]
+db = None
+client = None
+
+if mongo_url:
+    try:
+        client = AsyncIOMotorClient(mongo_url)
+        db = client[db_name]
+        logger.info("MongoDB connected")
+    except Exception as e:
+        logger.warning(f"MongoDB connection failed: {e}. Running in-memory only.")
+else:
+    logger.info("No MONGO_URL set. Running in-memory only (demo mode).")
 
 # FastAPI app
 app = FastAPI(
@@ -165,10 +175,14 @@ async def run_single_cycle(asset: str = "ETH"):
             agent.set_market_data_source(coingecko_adapter)
     
     artifact = await agent.run_cycle(asset)
-    
-    # Store in MongoDB
-    await db.validation_artifacts.insert_one(artifact.to_dict())
-    
+
+    # Persist to MongoDB if available
+    if db is not None:
+        try:
+            await db.validation_artifacts.insert_one(artifact.to_dict())
+        except Exception as e:
+            logger.warning(f"DB write skipped: {e}")
+
     return {
         "artifact_id": artifact.artifact_id,
         "timestamp": artifact.timestamp.isoformat(),
@@ -337,9 +351,13 @@ async def create_proposal(proposal: ProposalCreate):
             parameters=proposal.parameters,
         )
         
-        # Store in MongoDB
-        await db.proposals.insert_one(created.to_dict())
-        
+        # Persist to MongoDB if available
+        if db is not None:
+            try:
+                await db.proposals.insert_one(created.to_dict())
+            except Exception as e:
+                logger.warning(f"DB write skipped: {e}")
+
         return created.to_dict()
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -431,15 +449,20 @@ async def startup():
     """Initialize on startup"""
     logger.info("Sentinel-01 API starting...")
     logger.info(f"Policy Hash: {config.identity.policy_hash[:16]}...")
-    
-    # Create indexes
-    await db.validation_artifacts.create_index("artifact_id")
-    await db.validation_artifacts.create_index("timestamp")
-    await db.proposals.create_index("proposal_id")
+
+    # Create indexes only if MongoDB is available
+    if db is not None:
+        try:
+            await db.validation_artifacts.create_index("artifact_id")
+            await db.validation_artifacts.create_index("timestamp")
+            await db.proposals.create_index("proposal_id")
+        except Exception as e:
+            logger.warning(f"DB index creation skipped: {e}")
 
 @app.on_event("shutdown")
 async def shutdown():
     """Cleanup on shutdown"""
     agent.stop()
-    client.close()
+    if client:
+        client.close()
     logger.info("Sentinel-01 API stopped")
