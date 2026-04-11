@@ -16,7 +16,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "";
 const API = `${BACKEND_URL}/api`;
 
 // ============== Utility Functions ==============
@@ -174,8 +174,8 @@ const Dashboard = () => {
         ETH: ethRes.data,
         BTC: btcRes.data
       });
-      setArtifacts(artifactsRes.data);
-      setProposals(proposalsRes.data);
+      setArtifacts(Array.isArray(artifactsRes.data) ? artifactsRes.data : []);
+      setProposals(Array.isArray(proposalsRes.data) ? proposalsRes.data : []);
       setEmergencyStatus(emergencyRes.data);
       setError(null);
     } catch (e) {
@@ -411,7 +411,7 @@ const Dashboard = () => {
                 <CardContent>
                   <ScrollArea className="h-[200px]">
                     <div className="space-y-2">
-                      {artifacts.slice(0, 5).map((artifact, i) => (
+                      {(Array.isArray(artifacts) ? artifacts : []).slice(0, 5).map((artifact, i) => (
                         <ArtifactItem key={artifact.artifact_id || i} artifact={artifact} />
                       ))}
                       {artifacts.length === 0 && (
@@ -498,7 +498,7 @@ const Dashboard = () => {
               <CardContent>
                 <ScrollArea className="h-[500px]">
                   <div className="space-y-3">
-                    {artifacts.map((artifact, i) => (
+                    {(Array.isArray(artifacts) ? artifacts : []).map((artifact, i) => (
                       <ArtifactItem key={artifact.artifact_id || i} artifact={artifact} />
                     ))}
                     {artifacts.length === 0 && (
@@ -525,7 +525,7 @@ const Dashboard = () => {
                 <CardContent>
                   <ScrollArea className="h-[400px]">
                     <div className="space-y-3">
-                      {proposals.map((proposal, i) => (
+                      {(Array.isArray(proposals) ? proposals : []).map((proposal, i) => (
                         <ProposalItem key={proposal.proposal_id || i} proposal={proposal} />
                       ))}
                       {proposals.length === 0 && (
