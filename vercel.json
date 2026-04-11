@@ -16,14 +16,9 @@
       }
     }
   ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "backend/server.py"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "frontend/index.html"
-    }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "backend/server.py" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "frontend/index.html" }
   ]
 }
