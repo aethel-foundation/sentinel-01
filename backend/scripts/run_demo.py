@@ -12,8 +12,8 @@ from governance.emergency_protocol import emergency_protocol
 
 async def run_cinematic_demo():
     print("\n" + "="*60)
-    print(" 🛡️  SENTINEL-01: SOVEREIGN DEMO SEQUENCE")
-    print("      AETHEL Foundation | ERC-8004 Agent")
+    print(" [SHIELD] SENTINEL-01: SOVEREIGN DEMO SEQUENCE")
+    print(" [SYSTEM] Initializing Risk-Containment Architecture...")
     print("="*60 + "\n")
 
     # --- SCENARIO 1: NORMAL MARKET ---
@@ -27,8 +27,7 @@ async def run_cinematic_demo():
     artifact = await agent.run_cycle("ETH")
     
     print("\n[VERDICT]")
-    print(f"Action: {artifact.action.value.upper()}")
-    print(f"Reasoning: {artifact.reputation_data.get('reasoning', 'Proposing trade based on signals.')}")
+    print(f"Action: {artifact.action_taken.value.upper()}")
     print(f"Artifact Hash: {artifact.artifact_hash}")
     print("-" * 40)
 
@@ -36,12 +35,12 @@ async def run_cinematic_demo():
     print("\n[SCENARIO 2: EMERGENCY GOVERNANCE PAUSE]")
     print("> Action: AETHEL Foundation activates Emergency Circuit Breaker.")
     
-    emergency_protocol.pause_trading("Governance vote: Immediate market risk suspected.")
+    emergency_protocol.pause_trading()
     
     artifact = await agent.run_cycle("ETH")
     
     print("\n[VERDICT]")
-    print(f"Action: {artifact.action.value.upper()}")
+    print(f"Action: {artifact.action_taken.value.upper()}")
     print(f"Status: Trading is PAUSED by Sovereign Governance.")
     print(f"Artifact Hash: {artifact.artifact_hash}")
     print("-" * 40)
@@ -63,8 +62,8 @@ async def run_cinematic_demo():
     artifact = await agent.run_cycle("ETH")
     
     print("\n[VERDICT]")
-    print(f"Action: {artifact.action.value.upper()}")
-    print(f"Risk Assessment: {artifact.assessment.rejection_reasons if artifact.assessment else 'N/A'}")
+    print(f"Action: {artifact.action_taken.value.upper()}")
+    print(f"Risk Assessment: {artifact.risk_assessment.get('rejection_reasons') if artifact.risk_assessment else 'N/A'}")
     print(f"Result: Deterministic Veto enforced. Capital Preserved.")
     print("="*60 + "\n")
 

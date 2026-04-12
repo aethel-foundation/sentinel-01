@@ -16,9 +16,10 @@
       }
     }
   ],
+  "trailingSlash": false,
   "routes": [
     { "src": "/api/(.*)", "dest": "backend/server.py" },
     { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "frontend/index.html" }
+    { "src": "/((?!api).*)", "dest": "frontend/index.html" }
   ]
 }
