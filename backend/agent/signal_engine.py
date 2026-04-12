@@ -248,20 +248,20 @@ class SignalEngine:
         """
         thresholds = config.policy_thresholds
         
-        # Crisis conditions
+        # Crisis conditions (EMERGENCY)
         if (signal.volatility >= thresholds.volatility_crisis_threshold or
             signal.anomaly_score >= thresholds.anomaly_score_max):
-            return MarketRegime.CRISIS
+            return MarketRegime.EMERGENCY
         
-        # Volatile conditions
+        # Volatile conditions (RISK_OFF)
         if signal.volatility >= thresholds.volatility_volatile_max:
-            return MarketRegime.VOLATILE
+            return MarketRegime.RISK_OFF
         
-        # Normal conditions
+        # Normal conditions (RISK_ON)
         if signal.volatility <= thresholds.volatility_normal_max:
-            return MarketRegime.NORMAL
+            return MarketRegime.RISK_ON
         
-        return MarketRegime.UNKNOWN
+        return MarketRegime.NEUTRAL
     
     def generate_mock_signal(self, asset: str, base_price: float) -> MarketSignal:
         """

@@ -96,10 +96,10 @@ sentinel-01/
 
 | Regime | Comportamento |
 |--------|---------------|
-| **NORMAL** | Todas ações permitidas, sizing padrão |
-| **VOLATILE** | Defensivo, sizing reduzido |
-| **CRISIS** | Apenas HOLD, preservação de capital |
-| **UNKNOWN** | Conservador, aguardar clareza |
+| **RISK_ON** | Todas ações permitidas, sizing padrão |
+| **NEUTRAL** | Equilibrado, entradas cautelosas |
+| **RISK_OFF** | Defensivo, sizing reduzido |
+| **EMERGENCY** | Apenas HOLD ou Saída, preservação de capital absoluta |
 
 ## Endpoints da API
 

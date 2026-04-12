@@ -1,0 +1,18 @@
+{
+    "agent_name": "Sentinel-01",
+    "organization": "AETHEL Foundation",
+    "version": "1.0.0-HACKATHON",
+    "standard": "ERC-8004",
+    "capabilities": [
+        "capital_protection",
+        "risk_assessment",
+        "regime_classification",
+        "erc8004_validation"
+    ],
+    "endpoint": "https://sentinel-01-ui.vercel.app/api",
+    "policy_hash": "a08166e261091f57...",
+    "owner_address": "0xJo\u00e3oSovereignAddress...",
+    "identity_hash": "d765964112bf23cb60662d70cba9e392808aebfd2592527aff6c7f9b41febfc5",
+    "registration_date": "2026-04-12T11:48:52.335349+00:00",
+    "signature": "0x_sig_d765964112bf23cb_sovereign"
+}

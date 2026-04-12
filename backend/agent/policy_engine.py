@@ -58,36 +58,36 @@ class PolicyEngine:
     
     # Default regime policies
     REGIME_POLICIES = {
-        MarketRegime.NORMAL: {
+        MarketRegime.RISK_ON: {
             "allowed": {ActionType.HOLD, ActionType.BUY, ActionType.SELL},
             "max_trade_pct": 2.0,  # Full limit from config
             "position_multiplier": 1.0,
-            "reason": "Normal market conditions - standard trading allowed"
+            "reason": "Risk-On: Healthy market conditions - standard operation"
         },
-        MarketRegime.VOLATILE: {
+        MarketRegime.NEUTRAL: {
+            "allowed": {ActionType.HOLD, ActionType.SELL, ActionType.REDUCE_EXPOSURE},
+            "max_trade_pct": 1.5,
+            "position_multiplier": 0.75,
+            "reason": "Neutral: Uncertain conditions - reduced sizing, monitoring"
+        },
+        MarketRegime.RISK_OFF: {
             "allowed": {ActionType.HOLD, ActionType.SELL, ActionType.REDUCE_EXPOSURE},
             "max_trade_pct": 1.0,  # Reduced
             "position_multiplier": 0.5,
-            "reason": "Volatile conditions - defensive posture, reduced sizing"
+            "reason": "Risk-Off: Defensive posture required, capital preservation priority"
         },
-        MarketRegime.CRISIS: {
+        MarketRegime.EMERGENCY: {
             "allowed": {ActionType.HOLD, ActionType.REDUCE_EXPOSURE, ActionType.EMERGENCY_EXIT},
             "max_trade_pct": 0.0,  # No new positions
             "position_multiplier": 0.0,
-            "reason": "Crisis mode - capital preservation only, no new positions"
-        },
-        MarketRegime.UNKNOWN: {
-            "allowed": {ActionType.HOLD},
-            "max_trade_pct": 0.0,
-            "position_multiplier": 0.0,
-            "reason": "Unknown regime - holding until clarity"
+            "reason": "Emergency: Constitutional breach or severe crash - exit protocols active"
         }
     }
     
     def __init__(self):
         self._governance_paused = False
         self._governance_restrictions: Set[ActionType] = set()
-        self._current_regime = MarketRegime.UNKNOWN
+        self._current_regime = MarketRegime.NEUTRAL
     
     @property
     def is_paused(self) -> bool:
@@ -167,23 +167,23 @@ class PolicyEngine:
         """
         thresholds = config.policy_thresholds
         
-        # Crisis conditions
+        # Crisis conditions (EMERGENCY)
         if signal.volatility >= thresholds.volatility_crisis_threshold:
-            return MarketRegime.CRISIS
+            return MarketRegime.EMERGENCY
         
         if signal.anomaly_score >= thresholds.anomaly_score_max:
-            return MarketRegime.CRISIS
+            return MarketRegime.EMERGENCY
         
-        # Volatile conditions
+        # Volatile conditions (RISK_OFF)
         if signal.volatility >= thresholds.volatility_volatile_max:
-            return MarketRegime.VOLATILE
+            return MarketRegime.RISK_OFF
         
-        # Normal conditions
+        # Normal conditions (RISK_ON)
         if signal.volatility <= thresholds.volatility_normal_max:
-            return MarketRegime.NORMAL
+            return MarketRegime.RISK_ON
         
-        # Between normal and volatile - lean towards volatile
-        return MarketRegime.VOLATILE
+        # Between normal and volatile -> NEUTRAL
+        return MarketRegime.NEUTRAL
     
     def is_action_allowed(self, action: ActionType, policy: PolicyDecision) -> bool:
         """Check if specific action is allowed under current policy"""

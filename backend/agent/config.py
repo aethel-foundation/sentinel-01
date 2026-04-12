@@ -16,9 +16,10 @@ import json
 
 class MarketRegime(Enum):
     """Market regime classification for policy decisions"""
-    NORMAL = "normal"
-    VOLATILE = "volatile"
-    CRISIS = "crisis"
+    RISK_ON = "risk_on"
+    NEUTRAL = "neutral"
+    RISK_OFF = "risk_off"
+    EMERGENCY = "emergency"
     UNKNOWN = "unknown"
 
 

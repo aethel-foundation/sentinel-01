@@ -109,10 +109,10 @@ sentinel-01/
 
 | Regime | Behavior |
 |--------|----------|
-| **NORMAL** | All actions allowed, standard sizing |
-| **VOLATILE** | Defensive, reduced sizing |
-| **CRISIS** | HOLD only, capital preservation |
-| **UNKNOWN** | Conservative, await clarity |
+| **RISK_ON** | All actions allowed, standard sizing |
+| **NEUTRAL** | Balanced, cautious entries |
+| **RISK_OFF** | Defensive, reduced sizing |
+| **EMERGENCY** | HOLD or Exit only, capital preservation only |
 
 ## API Endpoints
 
